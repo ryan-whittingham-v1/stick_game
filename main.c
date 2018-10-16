@@ -13,13 +13,16 @@ Programming Assignment 2
 
 int intCheck(char*);
 int printSticks(int);
-int userTurn(int);
+int userTurn(int, char **);
+int cpuTurn(int, char **);
+
 /////////////////////////////////////////////////////////////////////////
 
 int main (int argc, char** argv) {
 	
 	char buffer[120];
 	int stickCount;
+	char *whoTurn = "User";
 	
 	if (argc == 1){ //no command line argument detected
 		printf("How many sticks would you like to play with?\n");
@@ -48,11 +51,20 @@ int main (int argc, char** argv) {
 	
 	while (stickCount > 0){
 		printSticks(stickCount);
-		stickCount = stickCount - userTurn(stickCount);
-		
+		stickCount = stickCount - userTurn(stickCount, &whoTurn);
+		if (stickCount < 1){
+			break;
+		}
+		else {
+		printSticks(stickCount);
+		stickCount = stickCount - cpuTurn(stickCount, &whoTurn);	
+		}
 	}
 	
-	return 0;
+	printf("%s wins!\n", whoTurn);
+	printf("Thanks for playing.\n\n");
+	
+return 0;
 }
 
 ////////////////////////   Functions   /////////////////////////////////
@@ -84,10 +96,14 @@ int printSticks(int n){
 	return 0;
 }
 
-int userTurn(int n){
+int userTurn(int n, char **s){
+	char *whoTurn = "User";
+	*s = whoTurn;
+	
 	char buffer[10];
 	int takeNum;
 	int validInput = 0;
+	*s = whoTurn;
 	while(validInput == 0){
 		printf("How many sticks do you want to take?\n");
 		fgets(buffer, 10, stdin);
@@ -101,5 +117,20 @@ int userTurn(int n){
 		}	
 	}
 	return takeNum;
+}
+
+int cpuTurn(int n, char **s){
+	char *whoTurn = "CPU";
+	*s = whoTurn;
+	
+	int takeNum = n%4;
+	if(takeNum == 0){
+		printf("I will take 1.\n");
+		return 1;
+	}
+	else{
+		printf("I will take %i.\n", takeNum);
+		return takeNum;
+	}
 }
 ///////////////////////////////////////////////////////////////////////}
