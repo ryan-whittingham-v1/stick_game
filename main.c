@@ -25,43 +25,50 @@ int main (int argc, char** argv) {
 	char *whoTurn = "User";
 	
 	if (argc == 1){ //no command line argument detected
-		printf("How many sticks would you like to play with?\n");
+		printf("\nWelcome to the Stick Game!\n");	
+		printf("\nHow many sticks would you like to play with?\n");
 		fgets(buffer, 120, stdin);
-		stickCount = intCheck(buffer);//function to check if valid #
+		if (intCheck(buffer) == 0){
+			return 0;
+		}
+		else{
+			stickCount = intCheck(buffer);//function to check if valid #
+		}
 	}
+
+
 
 	else if(argc != 2){ //invalid # of command line arguments
 		printf("Invalid number of arguments.\n");
 		return 0; //program exits
 	}
 
-	if(argc == 2){ //Correct number of arguments
+	else if(argc == 2){ //Correct number of arguments
 		stickCount = intCheck(argv[1]);//function to check if valid #
 		if (stickCount == 0){ //if invalid #...
 			return 0; //program exits
 		}
+		else{
+			printf("\nWelcome to the Stick Game!\n");	
+		}
 	}	
-	
-	if(stickCount >= 10){	
-		printf("Okay. Let's play with %i sticks.\n", stickCount);
-	}
-	else{
-		return 0;
-	}
 	
 	while (stickCount > 0){
 		printSticks(stickCount);
-		stickCount = stickCount - userTurn(stickCount, &whoTurn);
-		if (stickCount < 1){
-			break;
+		if (whoTurn == "User"){
+			stickCount = stickCount - userTurn(stickCount, &whoTurn);
 		}
 		else {
-		printSticks(stickCount);
-		stickCount = stickCount - cpuTurn(stickCount, &whoTurn);	
+			stickCount = stickCount - cpuTurn(stickCount, &whoTurn);	
 		}
 	}
-	
-	printf("%s wins!\n", whoTurn);
+	printf("\nThere are no more sticks left.\n");	
+	if (whoTurn == "User"){
+		printf("\nCPU wins.\n");
+	}
+	else{
+		printf("\nWow! You actually won.\n");
+	}
 	printf("Thanks for playing.\n\n");
 	
 return 0;
@@ -87,7 +94,7 @@ int intCheck(char buffer[]){ //Checks if input is an integer and >= 10
 
 int printSticks(int n){
 	int i=0;
-	printf("\n");
+	printf("\nCurrent number of sticks:\n");
 	while (i < n){
 		printf("|");
 		i = i+1;
@@ -97,7 +104,7 @@ int printSticks(int n){
 }
 
 int userTurn(int n, char **s){
-	char *whoTurn = "User";
+	char *whoTurn = "CPU";
 	*s = whoTurn;
 	
 	char buffer[10];
@@ -120,16 +127,16 @@ int userTurn(int n, char **s){
 }
 
 int cpuTurn(int n, char **s){
-	char *whoTurn = "CPU";
+	char *whoTurn = "User";
 	*s = whoTurn;
 	
 	int takeNum = n%4;
 	if(takeNum == 0){
-		printf("I will take 1.\n");
+		printf("CPU will take 1.\n");
 		return 1;
 	}
 	else{
-		printf("I will take %i.\n", takeNum);
+		printf("CPU will take %i.\n", takeNum);
 		return takeNum;
 	}
 }
