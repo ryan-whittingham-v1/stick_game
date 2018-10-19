@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include "PA2.h"
 int intCheck(char *);
 
 int start(int argc, char **argv){

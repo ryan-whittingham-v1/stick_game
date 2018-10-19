@@ -1,6 +1,5 @@
 #include<stdio.h>
-
-///////////////////////////////////////////////////////////////////////////
+#include "PA2.h"
 
 /*
 Ryan Whittingham
@@ -11,20 +10,9 @@ Programming Assignment 2
 
 Stick Game in C.
 
-Simple game of strategy using math. User and CPU take turns removing 1 to 3 sticks 
-from the pile until there are no more sticks remaining. Whoever takes the last stick wins.
+Simple game of strategy using math. User and CPU take turns removing 1 to 3 sticks from the pile until there are no more sticks remaining. Whoever takes the last stick wins.
 
 */
-
-////////////////////  Function Prototypes  //////////////////////////////
-
-int start(int, char **);
-int intCheck(char*);
-int printSticks(int);
-int userTurn(int, int *);
-int cpuTurn(int, int *);
-
-/////////////////////////////////////////////////////////////////////////
 
 int main (int argc, char** argv) {
 	
@@ -33,14 +21,14 @@ int main (int argc, char** argv) {
 
 /////////////////  Setting number of sticks  /////////////////////////////////
 
-	stickCount = start(argc, argv); //checks for cmd line args, else, prompts
-					//for number of sticks
-	if( stickCount <= 0){
+	stickCount = start(argc, argv);//checks for cmd line args, else, prompts
+				       //for number of sticks
+	if( stickCount <= 0){ //if input is invalid, game exits
 		printf("\nInvalid input.\nGoodbye.\n\n");
 		return 0;
 	}
 	else if (argc == 2){
-		printf("\nWelcome to the Stick Game!\n");
+		printf("\nWelcome to the Stick Game!\n");//welcome message for valid cmd line arg
 	}
 
 ///////////////////////  Gameplay  ///////////////////////////////////////////
