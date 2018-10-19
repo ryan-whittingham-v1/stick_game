@@ -1,5 +1,7 @@
 #include<stdio.h>
 
+int intCheck(char *);
+
 int start(int argc, char **argv){
 
         int stickCount;

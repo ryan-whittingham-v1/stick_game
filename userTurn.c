@@ -1,9 +1,8 @@
 #include<stdio.h>
 
-int userTurn(int n, char **s){
-        char *whoTurn = "CPU";
-        *s = whoTurn;
-
+int userTurn(int n, int *x){
+        int nextTurn = 0;
+	*x = nextTurn; //signifies CPU's turn is next
         char buffer[10];
         int takeNum;
         int validInput = 0;
