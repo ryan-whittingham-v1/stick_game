@@ -10,8 +10,9 @@ _User and CPU take turns removing 1 to 3 sticks from the pile until there are no
 
 ## Setup/Installation Requirements
 
-*_Clone the repository_
-*_Open directory in the command line_
+
+* _Clone the repository_
+* _Open directory in the command line_
 
 ## Technologies Used
 
